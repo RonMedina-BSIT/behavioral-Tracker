@@ -28,6 +28,12 @@ def analyze_frame():
         "status": "success",
         "emotion": emotion_label
     })
+@app.route('/reset_calibration', methods=['POST'])
+def reset_calibration():
+    intelliplay_ED.calibration.reset()
+    intelliplay_ED.smile_buffer.clear()
+    intelliplay_ED.gaze_buffer.clear()
+    return jsonify({"status": "reset"})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
